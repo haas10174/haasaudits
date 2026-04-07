@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haas Audits | ISO 27001 Audit &amp; Certificering</title>
+  <meta name="description" content="Haas Audits — gecertificeerde ISO 27001 auditors gespecialiseerd in informatiebeveiliging voor IT, Defensie en Bouw. Audit, advies en certificeringsbegeleiding." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0B1628;
+      --navy2:   #132040;
+      --blue:    #1A56DB;
+      --blue-l:  #3B82F6;
+      --accent:  #F97316;
+      --accent2: #FB923C;
+      --white:   #FFFFFF;
+      --gray-50: #F8FAFC;
+      --gray-100:#F1F5F9;
+      --gray-300:#CBD5E1;
+      --gray-500:#64748B;
+      --gray-700:#334155;
+      --gray-900:#0F172A;
+      --green:   #10B981;
+      --radius:  12px;
+      --shadow:  0 4px 32px rgba(11,22,40,.12);
+      --shadow-l:0 16px 64px rgba(11,22,40,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--white);
+      color: var(--gray-700);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMATED MESH / FX ────────────────────────── */
+    @keyframes meshMove {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -50px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(.95); }
+      75% { transform: translate(50px, 30px) scale(1.02); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,.2); }
+      50% { box-shadow: 0 0 40px rgba(59,130,246,.4), 0 0 80px rgba(59,130,246,.1); }
+    }
+
+    .mesh-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mesh-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .35;
+      animation: meshMove 20s ease-in-out infinite;
+    }
+
+    .mesh-blob:nth-child(1) {
+      width: 600px; height: 600px;
+      background: var(--blue);
+      top: -15%; right: -10%;
+      animation-delay: 0s;
+    }
+
+    .mesh-blob:nth-child(2) {
+      width: 500px; height: 500px;
+      background: #8B5CF6;
+      bottom: -10%; left: -5%;
+      animation-delay: -7s;
+    }
+
+    .mesh-blob:nth-child(3) {
+      width: 400px; height: 400px;
+      background: var(--accent);
+      top: 40%; left: 30%;
+      animation-delay: -14s;
+      opacity: .15;
+    }
+
+    /* Grid overlay */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow card effect */
+    .glow-card {
+      position: relative;
+    }
+
+    .glow-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(59,130,246,.3), rgba(139,92,246,.2), rgba(249,115,22,.1));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity .4s;
+      filter: blur(12px);
+    }
+
+    .glow-card:hover::after { opacity: 1; }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--blue-l), #818CF8, #C084FC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Animated gradient border */
+    .gradient-border {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), #8B5CF6, var(--accent), var(--blue));
+      background-size: 200% 100%;
+      animation: gradientShift 4s ease infinite;
+    }
+
+    /* Image strip */
+    .image-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .strip-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strip-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+      filter: brightness(.5) saturate(.7);
+    }
+
+    .strip-img:hover img {
+      transform: scale(1.08);
+      filter: brightness(.65) saturate(.85);
+    }
+
+    .strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(11,22,40,.3), rgba(11,22,40,.6));
+      pointer-events: none;
+    }
+
+    @media (max-width: 680px) {
+      .image-strip { grid-template-columns: 1fr 1fr; height: 200px; }
+    }
+
+    /* Tilt card on hover */
+    .tilt-hover {
+      transition: transform .4s cubic-bezier(.25,.46,.45,.94), box-shadow .4s;
+    }
+
+    .tilt-hover:hover {
+      transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+    }
+
+    /* Counter animation helper */
+    .counter { display: inline-block; }
+
+    /* ── FOCUS & A11Y ────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--blue-l);
+      outline-offset: 2px;
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--blue-l);
+      outline-offset: 2px;
+    }
+
+    /* no-JS fallback: show content even without JS */
+    .dienst-card, .sector-card, .testimonial-card, .step {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .js-loaded .dienst-card,
+    .js-loaded .sector-card,
+    .js-loaded .testimonial-card,
+    .js-loaded .step {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .js-loaded .is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* ── HAMBURGER ───────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 200;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,22,40,.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      transition: all .3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg { width: 44px; height: 44px; }
+
+    .nav-logo-text {
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+      transition: all .3s;
+    }
+
+    .nav-logo-text em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue-l), #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: .65rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.4);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-top: 2px;
+      -webkit-text-fill-color: rgba(255,255,255,.4);
+      background: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-links a.nav-cta {
+      background: var(--blue);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background .2s;
+    }
+
+    .nav-links a.nav-cta:hover { background: var(--blue-l); color: white; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* mesh-bg handles hero background effects */
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue-l), #818CF8, #C084FC);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease infinite;
+    }
+
+    .hero-desc {
+      color: rgba(255,255,255,.7);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #4F46E5);
+      color: white;
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .3s;
+      box-shadow: 0 8px 32px rgba(26,86,219,.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transition: left .5s;
+    }
+
+    .btn-primary:hover::before { left: 100%; }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--blue-l), #6366F1);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(26,86,219,.5), 0 0 40px rgba(99,102,241,.2);
+    }
+
+    .btn-ghost {
+      color: rgba(255,255,255,.8);
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.15);
+      transition: all .25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,.35);
+      color: white;
+      background: rgba(255,255,255,.05);
+    }
+
+    /* ── HERO VISUAL ─────────────────────────────── */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Orbit rings — hero background */
+    .orbit-container {
+      position: absolute;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(59,130,246,.06);
+      top: 50%; left: 35%;
+      transform: translate(-50%, -50%);
+    }
+
+    .orbit-ring:nth-child(2) { width: 500px; height: 500px; animation: orbitSpin 40s linear infinite; border-color: rgba(59,130,246,.18); }
+    .orbit-ring:nth-child(3) { width: 750px; height: 750px; animation: orbitSpin 60s linear infinite reverse; border-color: rgba(139,92,246,.14); }
+    .orbit-ring:nth-child(4) { width: 1000px; height: 1000px; animation: orbitSpin 80s linear infinite; border-color: rgba(99,102,241,.10); }
+
+    @keyframes orbitSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* Orbs on rings */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .orb-blue {
+      width: 10px; height: 10px;
+      background: #3B82F6;
+      box-shadow: 0 0 16px 4px rgba(59,130,246,.5), 0 0 40px 8px rgba(59,130,246,.2);
+    }
+
+    .orb-purple {
+      width: 8px; height: 8px;
+      background: #8B5CF6;
+      box-shadow: 0 0 14px 4px rgba(139,92,246,.5), 0 0 36px 8px rgba(139,92,246,.2);
+    }
+
+    .orb-cyan {
+      width: 7px; height: 7px;
+      background: #06B6D4;
+      box-shadow: 0 0 12px 3px rgba(6,182,212,.5), 0 0 32px 6px rgba(6,182,212,.2);
+    }
+
+    .orb-green {
+      width: 6px; height: 6px;
+      background: #10B981;
+      box-shadow: 0 0 12px 3px rgba(16,185,129,.5), 0 0 30px 6px rgba(16,185,129,.2);
+    }
+
+    /* Each orb gets its own elliptical orbit via individual keyframes */
+    .orb-1 { animation: orbPath1 35s ease-in-out infinite; }
+    .orb-2 { animation: orbPath2 45s ease-in-out infinite; }
+    .orb-3 { animation: orbPath3 40s ease-in-out infinite reverse; }
+    .orb-4 { animation: orbPath4 55s ease-in-out infinite; }
+    .orb-5 { animation: orbPath5 30s ease-in-out infinite reverse; }
+    .orb-6 { animation: orbPath6 60s ease-in-out infinite; }
+    .orb-7 { animation: orbPath7 38s ease-in-out infinite reverse; }
+
+    @keyframes orbPath1 {
+      0%   { top: 15%; left: 10%; }
+      25%  { top: 5%;  left: 50%; }
+      50%  { top: 30%; left: 80%; }
+      75%  { top: 60%; left: 40%; }
+      100% { top: 15%; left: 10%; }
+    }
+    @keyframes orbPath2 {
+      0%   { top: 70%; left: 75%; }
+      25%  { top: 40%; left: 90%; }
+      50%  { top: 10%; left: 60%; }
+      75%  { top: 50%; left: 30%; }
+      100% { top: 70%; left: 75%; }
+    }
+    @keyframes orbPath3 {
+      0%   { top: 50%; left: 20%; }
+      25%  { top: 80%; left: 50%; }
+      50%  { top: 45%; left: 75%; }
+      75%  { top: 20%; left: 55%; }
+      100% { top: 50%; left: 20%; }
+    }
+    @keyframes orbPath4 {
+      0%   { top: 85%; left: 15%; }
+      25%  { top: 60%; left: 5%;  }
+      50%  { top: 25%; left: 25%; }
+      75%  { top: 55%; left: 45%; }
+      100% { top: 85%; left: 15%; }
+    }
+    @keyframes orbPath5 {
+      0%   { top: 10%; left: 70%; }
+      25%  { top: 35%; left: 95%; }
+      50%  { top: 65%; left: 65%; }
+      75%  { top: 30%; left: 45%; }
+      100% { top: 10%; left: 70%; }
+    }
+    @keyframes orbPath6 {
+      0%   { top: 90%; left: 50%; }
+      25%  { top: 55%; left: 15%; }
+      50%  { top: 20%; left: 40%; }
+      75%  { top: 65%; left: 80%; }
+      100% { top: 90%; left: 50%; }
+    }
+    @keyframes orbPath7 {
+      0%   { top: 35%; left: 85%; }
+      25%  { top: 75%; left: 60%; }
+      50%  { top: 80%; left: 30%; }
+      75%  { top: 40%; left: 15%; }
+      100% { top: 35%; left: 85%; }
+    }
+
+    .orbit-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      top: 50%; left: 35%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(59,130,246,.15) 0%, rgba(99,102,241,.08) 40%, transparent 70%);
+      border-radius: 50%;
+      animation: glowPulse2 5s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse2 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .5; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    .audit-doc {
+      width: 320px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+
+    .audit-doc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .audit-doc-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue), #6366F1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .audit-doc-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; }
+
+    .audit-doc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .audit-doc-sub {
+      font-size: .7rem;
+      color: rgba(255,255,255,.4);
+    }
+
+    .audit-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: auditLineIn .4s ease forwards;
+    }
+
+    .audit-line:nth-child(1) { animation-delay: .6s; }
+    .audit-line:nth-child(2) { animation-delay: 1.0s; }
+    .audit-line:nth-child(3) { animation-delay: 1.4s; }
+    .audit-line:nth-child(4) { animation-delay: 1.8s; }
+    .audit-line:nth-child(5) { animation-delay: 2.2s; }
+
+    @keyframes auditLineIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .audit-check {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .audit-check.done {
+      background: rgba(16,185,129,.15);
+    }
+
+    .audit-check.done svg {
+      width: 13px; height: 13px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .audit-check.pending {
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.15);
+    }
+
+    .audit-line-text {
+      font-size: .82rem;
+      color: rgba(255,255,255,.6);
+      flex: 1;
+    }
+
+    .audit-line.checked .audit-line-text {
+      color: rgba(255,255,255,.8);
+    }
+
+    .audit-line-status {
+      font-size: .65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .status-pass {
+      background: rgba(16,185,129,.12);
+      color: var(--green);
+    }
+
+    .status-review {
+      background: rgba(251,191,36,.12);
+      color: #FBBF24;
+    }
+
+
+    /* Progress bar in doc */
+    .audit-progress {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+    }
+
+
+    .audit-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .7rem;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 8px;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .audit-progress-bar {
+      height: 6px;
+      background: rgba(255,255,255,.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .audit-progress-fill {
+      height: 100%;
+      width: 80%;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      border-radius: 3px;
+    }
+
+    .audit-progress.completed .audit-progress-fill {
+      width: 100% !important;
+      background: linear-gradient(90deg, var(--green), #34D399);
+    }
+
+    .audit-cta {
+      display: none;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .audit-cta.show {
+      display: block;
+      animation: auditLineIn .4s ease forwards;
+    }
+
+    .audit-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--blue), #4F46E5);
+      color: white;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all .3s;
+    }
+
+    .audit-cta a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,86,219,.4);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-visual { display: none; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-actions { justify-content: center; }
+    }
+
+    /* ── TICKER BAR ───────────────────────────────── */
+    .ticker-bar {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 18px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker-bar::before,
+    .ticker-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ticker-bar::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--navy), transparent);
+    }
+
+    .ticker-bar::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--navy), transparent);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerScroll 50s linear infinite;
+    }
+
+    .ticker-bar:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .ticker-item {
+      font-family: 'Outfit', sans-serif;
+      font-size: .8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.35);
+      white-space: nowrap;
+      padding: 4px 0;
+      transition: all .4s;
+      cursor: default;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .ticker-item:hover {
+      color: rgba(255,255,255,.8);
+      text-shadow: 0 0 20px rgba(59,130,246,.3);
+    }
+
+    .ticker-dot {
+      font-size: .6rem;
+      color: rgba(59,130,246,.25);
+      flex-shrink: 0;
+      margin: 0 20px;
+      line-height: 1;
+    }
+
+    .ticker-dot::after { content: '◆'; }
+
+    @keyframes tickerScroll {
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION SHARED ───────────────────────────── */
+    section { padding: 100px 5%; }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      max-width: 580px;
+      line-height: 1.75;
+    }
+
+    /* ── DIENSTEN ─────────────────────────────────── */
+    #diensten { background: white; }
+
+    .diensten-header {
+      margin-bottom: 56px;
+    }
+
+    .diensten-header .section-desc {
+      margin-top: 16px;
+    }
+
+    .diensten-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .dienst-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: all .4s cubic-bezier(.25,.46,.45,.94);
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dienst-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow-l);
+      transform: translateY(-4px);
+      background: white;
+    }
+
+    .dienst-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      background: rgba(26,86,219,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+    }
+
+    .dienst-icon svg { width: 20px; height: 20px; }
+
+    .dienst-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .dienst-desc {
+      font-size: .88rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .dienst-link {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap .2s;
+      cursor: pointer;
+    }
+
+    .dienst-link:hover { gap: 10px; }
+
+    .dienst-card.expanded {
+      background: white;
+      border-color: var(--blue);
+      box-shadow: var(--shadow-l), 0 0 0 1px rgba(26,86,219,.1);
+      transform: translateY(-4px);
+      z-index: 2;
+    }
+
+    .dienst-card.expanded .dienst-link {
+      color: var(--gray-500);
+    }
+
+    .dienst-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.25,.46,.45,.94), margin .4s, opacity .4s;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .dienst-detail.open {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 16px;
+    }
+
+    .dienst-detail-inner {
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(26,86,219,.04), rgba(99,102,241,.03));
+      border-radius: 8px;
+      border-left: 3px solid var(--blue);
+      font-size: .82rem;
+      color: var(--gray-700);
+      line-height: 1.75;
+    }
+
+    .dienst-detail-inner ul {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+    }
+
+    .dienst-detail-inner li {
+      padding: 4px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .dienst-detail-inner li::before {
+      content: '✓';
+      color: var(--blue);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(249,115,22,.15);
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* ── WERKWIJZE ────────────────────────────────── */
+    #werkwijze { background: var(--gray-50); }
+
+    .werkwijze-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 48px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      position: relative;
+    }
+
+    .step:not(:last-child) .step-line {
+      position: absolute;
+      left: 19px;
+      top: 52px;
+      width: 2px;
+      height: calc(100% - 20px);
+      background: linear-gradient(to bottom, var(--blue), transparent);
+    }
+
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), #6366F1);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .85rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 6px rgba(26,86,219,.12), 0 4px 16px rgba(99,102,241,.3);
+    }
+
+    .step-body { padding-bottom: 40px; }
+
+    .step-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+
+    .step-desc {
+      font-size: .9rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    .werkwijze-visual { }
+
+    .visual-card {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 40px;
+      color: white;
+    }
+
+    .visual-card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: white;
+    }
+
+    .visual-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .9rem;
+      color: rgba(255,255,255,.75);
+    }
+
+    .visual-check-item:last-child { border-bottom: none; }
+
+    .check-icon {
+      width: 22px; height: 22px;
+      background: rgba(16,185,129,.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: .7rem;
+      color: var(--green);
+    }
+
+
+    /* ── OVER MIJ ─────────────────────────────────── */
+    #over {
+      background: white;
+    }
+
+    #over {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .over-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .over-bg-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .over-bg-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,1) 85%);
+      pointer-events: none;
+    }
+
+    .over-bg-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,.3) 0%, transparent 20%, transparent 80%, rgba(255,255,255,.5) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .over-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .over-photo-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.95);
+      border-radius: 12px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+
+    .over-photo-badge-icon { font-size: 1.2rem; }
+
+    .over-photo-badge-text {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .over-photo-badge-text span {
+      display: block;
+      font-weight: 400;
+      color: var(--gray-500);
+      font-size: .72rem;
+    }
+
+
+    .over-content { }
+
+    .over-highlight {
+      font-size: 1.05rem;
+      color: var(--navy);
+      font-weight: 500;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .principle-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .principle-item:first-child { padding-top: 0; }
+    .principle-item:last-child { border-bottom: none; }
+
+    .principle-q {
+      font-family: 'Sora', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .principle-q::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: linear-gradient(135deg, var(--blue), #6366F1);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .principle-a {
+      font-size: .88rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      padding-left: 16px;
+    }
+
+    /* ── PROOF BAR ────────────────────────────────── */
+    .proof-bar {
+      background: var(--navy);
+      padding: 56px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .proof-stat { text-align: center; flex: 1; }
+
+    .proof-num {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .proof-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.45);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .proof-divider {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,.1);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 680px) {
+      .proof-inner { flex-wrap: wrap; gap: 32px; }
+      .proof-stat { min-width: 40%; }
+      .proof-divider { display: none; }
+    }
+
+    /* ── SECTOREN ─────────────────────────────────── */
+    #sectoren { background: var(--navy); position: relative; overflow: hidden; }
+
+    #sectoren .section-label { color: var(--blue-l); }
+    #sectoren .section-label::before { background: var(--blue-l); }
+    #sectoren .section-title { color: white; }
+    #sectoren .section-desc { color: rgba(255,255,255,.5); }
+
+    .sectoren-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .sector-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: all .4s cubic-bezier(.25,.46,.45,.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sector-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--blue), #8B5CF6);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .sector-card:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.15);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(59,130,246,.15);
+    }
+
+    .sector-card:hover::before { opacity: 1; }
+
+    .sector-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .sector-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .sector-desc {
+      font-size: .88rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.7;
+    }
+
+    /* ── TESTIMONIALS ─────────────────────────────── */
+    #testimonials { background: var(--gray-50); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all .4s cubic-bezier(.25,.46,.45,.94);
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      box-shadow: var(--shadow-l);
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,.2);
+    }
+
+    .quote-mark {
+      font-size: 3rem;
+      font-family: Georgia, serif;
+      color: var(--blue);
+      line-height: .7;
+      margin-bottom: 16px;
+      display: block;
+      opacity: .4;
+    }
+
+    .testimonial-text {
+      font-size: .92rem;
+      color: var(--gray-700);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-weight: 700;
+      font-size: .88rem;
+      color: var(--navy);
+    }
+
+    .author-role {
+      font-size: .78rem;
+      color: var(--gray-500);
+    }
+
+    .stars {
+      color: #F59E0B;
+      font-size: .7rem;
+      letter-spacing: 1px;
+      margin-top: 3px;
+    }
+
+    /* ── CTA ──────────────────────────────────────── */
+    #contact {
+      background: linear-gradient(135deg, var(--navy) 0%, #0D1F3C 100%);
+      padding: 100px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(59,130,246,.2) 0%, rgba(139,92,246,.1) 30%, transparent 65%);
+      pointer-events: none;
+      animation: meshMove 15s ease-in-out infinite;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+
+    .cta-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    .contact-options {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-option {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-decoration: none;
+      transition: all .3s;
+      min-width: 180px;
+    }
+
+    .contact-option:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.25);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(59,130,246,.15);
+    }
+
+    .contact-option-icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .contact-option-label {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 6px;
+    }
+
+    .contact-option-value {
+      font-size: .95rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* ── INTAKE MODAL ─────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,22,40,.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 32px 96px rgba(0,0,0,.3);
+      transform: translateY(20px) scale(.97);
+      transition: transform .3s cubic-bezier(.25,.46,.45,.94);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      padding: 32px 32px 0;
+    }
+
+    .modal-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-size: .88rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gray-50);
+      color: var(--gray-500);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+
+    .modal-close:hover {
+      background: var(--gray-100);
+      color: var(--navy);
+    }
+
+    .modal-form {
+      padding: 24px 32px 32px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--gray-100);
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: .88rem;
+      color: var(--navy);
+      background: var(--gray-50);
+      transition: all .2s;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+      background: white;
+    }
+
+    .form-input::placeholder {
+      color: var(--gray-300);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--blue), #4F46E5);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Sora', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(26,86,219,.4);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: .75rem;
+      color: var(--gray-500);
+      margin-top: 12px;
+    }
+
+    /* Success state */
+    .modal-success {
+      display: none;
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .modal-success.show { display: block; }
+    .modal-form.hidden { display: none; }
+    .modal-header.hidden { display: none; }
+
+    .success-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--green), #34D399);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+      animation: successPop .4s cubic-bezier(.17,.67,.35,1.5);
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    .success-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .success-text {
+      font-size: .9rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: var(--gray-900);
+      padding: 60px 5% 32px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand { }
+
+    .footer-logo-big {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .footer-logo-text {
+      font-family: 'Sora', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -.02em;
+    }
+
+    .footer-logo-accent {
+      background: linear-gradient(135deg, var(--blue-l), #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-brand-desc {
+      color: rgba(255,255,255,.35);
+      font-size: .85rem;
+      line-height: 1.8;
+      margin-top: 16px;
+    }
+
+    .footer-col-title {
+      font-weight: 700;
+      color: white;
+      font-size: .85rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,.45);
+      text-decoration: none;
+      font-size: .85rem;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,.8); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      color: rgba(255,255,255,.25);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 1024px) {
+      .over-grid, .werkwijze-grid { grid-template-columns: 1fr; gap: 48px; }
+      .over-bg-image { width: 100%; height: 300px; position: relative; opacity: .3; }
+      .over-bg-image::after { background: linear-gradient(to bottom, transparent 50%, white 100%); }
+      .diensten-grid { grid-template-columns: 1fr 1fr; }
+      .sectoren-grid, .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      nav { padding: 0 4%; }
+
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 72px;
+        left: 0; right: 0; bottom: 0;
+        background: rgba(11,22,40,.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        z-index: 99;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a { font-size: 1.1rem; }
+
+      .nav-links a.nav-cta {
+        padding: 14px 32px;
+        font-size: 1rem;
+      }
+
+      section { padding: 64px 4%; }
+      .hero { padding: 100px 4% 64px; }
+      .diensten-grid, .sectoren-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .contact-options { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────── -->
+<header>
+<nav aria-label="Hoofdnavigatie">
+  <a href="#" class="nav-logo" aria-label="Home">
+    <div class="nav-logo-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#6366F1"/></linearGradient></defs><rect width="40" height="40" rx="10" fill="url(#logoGrad)"/><path d="M20 8L28 12V20C28 25.5 24.5 30 20 32C15.5 30 12 25.5 12 20V12L20 8Z" fill="rgba(255,255,255,.15)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M16.5 20L19 22.5L24 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="nav-logo-text">
+      Haas <em>Audits</em>
+      <span>ISO 27001 Audit &amp; Certificering</span>
+    </div>
+  </a>
+  <button class="nav-hamburger" aria-label="Menu openen" aria-expanded="false" aria-controls="nav-menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-menu" role="navigation">
+    <li><a href="#diensten">Diensten</a></li>
+    <li><a href="#werkwijze">Werkwijze</a></li>
+    <li><a href="#sectoren">Sectoren</a></li>
+    <li><a href="#over">Over ons</a></li>
+    <li><a href="#contact" class="nav-cta">Plan een gesprek</a></li>
+  </ul>
+</nav>
+</header>
+
+<main>
+<!-- ─── HERO ──────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="mesh-bg">
+    <div class="mesh-blob"></div>
+    <div class="mesh-blob"></div>
+    <div class="mesh-blob"></div>
+  </div>
+  <div class="orbit-container">
+    <div class="orbit-glow"></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring"></div>
+    <div class="orb orb-blue orb-1"></div>
+    <div class="orb orb-purple orb-2"></div>
+    <div class="orb orb-cyan orb-3"></div>
+    <div class="orb orb-blue orb-4"></div>
+    <div class="orb orb-green orb-5"></div>
+    <div class="orb orb-purple orb-6"></div>
+    <div class="orb orb-cyan orb-7"></div>
+  </div>
+  <div class="grid-overlay"></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <h1>
+        Informatiebeveiliging<br />
+        die écht <em>werkt</em>.
+      </h1>
+      <p class="hero-desc">
+        Wij begeleiden organisaties naar ISO 27001-certificering en voeren onafhankelijke audits uit die verder gaan dan een checklist. Kritisch, grondig en pragmatisch — met oog voor de menselijke kant van security.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Plan een gratis intakegesprek
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#diensten" class="btn-ghost">
+          Bekijk diensten
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="audit-doc" id="auditDoc">
+        <div class="audit-doc-header">
+          <div class="audit-doc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg></div>
+          <div>
+            <div class="audit-doc-title">ISO 27001 Audit Report</div>
+            <div class="audit-doc-sub">Haas Audits — Stage 2</div>
+          </div>
+        </div>
+
+        <div class="audit-lines">
+          <div class="audit-line checked">
+            <div class="audit-check done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+            <div class="audit-line-text">A.5 Organisatorische maatregelen</div>
+            <div class="audit-line-status status-pass">Pass</div>
+          </div>
+          <div class="audit-line checked">
+            <div class="audit-check done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+            <div class="audit-line-text">A.6 Persoonsgebonden maatregelen</div>
+            <div class="audit-line-status status-pass">Pass</div>
+          </div>
+          <div class="audit-line checked">
+            <div class="audit-check done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+            <div class="audit-line-text">A.7 Fysieke beveiliging</div>
+            <div class="audit-line-status status-pass">Pass</div>
+          </div>
+          <div class="audit-line checked">
+            <div class="audit-check done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div>
+            <div class="audit-line-text">A.8 Technologische maatregelen</div>
+            <div class="audit-line-status status-pass">Pass</div>
+          </div>
+          <div class="audit-line">
+            <div class="audit-check pending"></div>
+            <div class="audit-line-text">A.9 Toegangsbeveiliging</div>
+            <div class="audit-line-status status-review">Review</div>
+          </div>
+        </div>
+
+        <div class="audit-progress" id="auditProgress">
+          <div class="audit-progress-label">
+            <span>Audit voortgang</span>
+            <span id="progressPct">80%</span>
+          </div>
+          <div class="audit-progress-bar">
+            <div class="audit-progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+        <div class="audit-cta" id="auditCta">
+          <a href="#contact">Plan je gratis intake →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER BAR ──────────────────────────────────── -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <div class="ticker-content">
+      <span class="ticker-item">ISO 27001</span><span class="ticker-dot"></span><span class="ticker-item">Cloud Security</span><span class="ticker-dot"></span><span class="ticker-item">ISMS</span><span class="ticker-dot"></span><span class="ticker-item">NIS2</span><span class="ticker-dot"></span><span class="ticker-item">Risicomanagement</span><span class="ticker-dot"></span><span class="ticker-item">Certificering</span><span class="ticker-dot"></span><span class="ticker-item">Gap-analyse</span><span class="ticker-dot"></span><span class="ticker-item">Interne Audit</span><span class="ticker-dot"></span><span class="ticker-item">Annex A</span><span class="ticker-dot"></span><span class="ticker-item">SaaS &amp; MSP</span><span class="ticker-dot"></span><span class="ticker-item">BIO</span><span class="ticker-dot"></span><span class="ticker-item">DevSecOps</span><span class="ticker-dot"></span><span class="ticker-item">Compliance</span><span class="ticker-dot"></span><span class="ticker-item">ISO 27001</span><span class="ticker-dot"></span><span class="ticker-item">Cloud Security</span><span class="ticker-dot"></span><span class="ticker-item">ISMS</span><span class="ticker-dot"></span><span class="ticker-item">NIS2</span><span class="ticker-dot"></span><span class="ticker-item">Risicomanagement</span><span class="ticker-dot"></span><span class="ticker-item">Certificering</span><span class="ticker-dot"></span><span class="ticker-item">Gap-analyse</span><span class="ticker-dot"></span><span class="ticker-item">Interne Audit</span><span class="ticker-dot"></span><span class="ticker-item">Annex A</span><span class="ticker-dot"></span><span class="ticker-item">SaaS &amp; MSP</span><span class="ticker-dot"></span><span class="ticker-item">BIO</span><span class="ticker-dot"></span><span class="ticker-item">DevSecOps</span><span class="ticker-dot"></span><span class="ticker-item">Compliance</span><span class="ticker-dot"></span>
+    </div>
+    <div class="ticker-content" aria-hidden="true">
+      <span class="ticker-item">ISO 27001</span><span class="ticker-dot"></span><span class="ticker-item">Cloud Security</span><span class="ticker-dot"></span><span class="ticker-item">ISMS</span><span class="ticker-dot"></span><span class="ticker-item">NIS2</span><span class="ticker-dot"></span><span class="ticker-item">Risicomanagement</span><span class="ticker-dot"></span><span class="ticker-item">Certificering</span><span class="ticker-dot"></span><span class="ticker-item">Gap-analyse</span><span class="ticker-dot"></span><span class="ticker-item">Interne Audit</span><span class="ticker-dot"></span><span class="ticker-item">Annex A</span><span class="ticker-dot"></span><span class="ticker-item">SaaS &amp; MSP</span><span class="ticker-dot"></span><span class="ticker-item">BIO</span><span class="ticker-dot"></span><span class="ticker-item">DevSecOps</span><span class="ticker-dot"></span><span class="ticker-item">Compliance</span><span class="ticker-dot"></span><span class="ticker-item">ISO 27001</span><span class="ticker-dot"></span><span class="ticker-item">Cloud Security</span><span class="ticker-dot"></span><span class="ticker-item">ISMS</span><span class="ticker-dot"></span><span class="ticker-item">NIS2</span><span class="ticker-dot"></span><span class="ticker-item">Risicomanagement</span><span class="ticker-dot"></span><span class="ticker-item">Certificering</span><span class="ticker-dot"></span><span class="ticker-item">Gap-analyse</span><span class="ticker-dot"></span><span class="ticker-item">Interne Audit</span><span class="ticker-dot"></span><span class="ticker-item">Annex A</span><span class="ticker-dot"></span><span class="ticker-item">SaaS &amp; MSP</span><span class="ticker-dot"></span><span class="ticker-item">BIO</span><span class="ticker-dot"></span><span class="ticker-item">DevSecOps</span><span class="ticker-dot"></span><span class="ticker-item">Compliance</span><span class="ticker-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── IMAGE STRIP ─────────────────────────────────── -->
+<div class="image-strip">
+  <div class="strip-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="Handshake audit" loading="lazy" /><div class="strip-overlay"></div></div>
+  <div class="strip-img"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" alt="Boardroom overleg" loading="lazy" /><div class="strip-overlay"></div></div>
+  <div class="strip-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Data dashboard" loading="lazy" /><div class="strip-overlay"></div></div>
+  <div class="strip-img"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="Kantoor" loading="lazy" /><div class="strip-overlay"></div></div>
+</div>
+
+<!-- ─── DIENSTEN ───────────────────────────────────── -->
+<section id="diensten">
+  <div class="section-inner">
+    <div class="diensten-header">
+      <div class="section-label">Wat wij doen</div>
+      <h2 class="section-title">Diensten op maat<br />van uw organisatie</h2>
+      <p class="section-desc">Van nulmeting tot certificering: wij begeleiden u stap voor stap naar aantoonbare informatiebeveiliging.</p>
+    </div>
+
+    <div class="diensten-grid">
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+        <div class="dienst-title">Gap-analyse &amp; Nulmeting</div>
+        <p class="dienst-desc">Waar staat uw organisatie nu? Wij toetsen uw huidige situatie aan de eisen van ISO 27001 en leveren een helder overzicht met prioriteiten.</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Toetsing aan alle clausules van ISO 27001:2022</li>
+              <li>Interviews met sleutelfiguren binnen uw organisatie</li>
+              <li>Overzichtelijk rapport met bevindingen en prioriteiten</li>
+              <li>Concreet actieplan voor de vervolgstappen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg></div>
+        <div class="dienst-title">Interne Audits</div>
+        <p class="dienst-desc">Volledige interne audits conform ISO 27001 en ISO 19011 — van documentatiereview (Stage 1) tot implementatie-audit (Stage 2).</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Stage 1: beoordeling van documentatie en ISMS-opzet</li>
+              <li>Stage 2: audit van de daadwerkelijke implementatie</li>
+              <li>Auditrapport met bevindingen en non-conformiteiten</li>
+              <li>Aanbevelingen voor correctieve maatregelen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="dienst-title">ISMS Opzet &amp; Verbetering</div>
+        <p class="dienst-desc">Wij helpen bij het opzetten of verbeteren van uw Information Security Management System — van beleid en procedures tot awareness.</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Opstellen van informatiebeveiligingsbeleid</li>
+              <li>Inrichten van processen, rollen en verantwoordelijkheden</li>
+              <li>Awareness-programma voor medewerkers</li>
+              <li>Voorbereiding op managementreview en continue verbetering</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div>
+        <div class="dienst-title">Risicoanalyse</div>
+        <p class="dienst-desc">Gestructureerde risico-identificatie en -behandeling. Wij begeleiden het volledige proces inclusief SoA en risicobehandelingsplan.</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Risico-identificatie afgestemd op uw bedrijfsprocessen</li>
+              <li>Beoordeling van dreigingen, kwetsbaarheden en impact</li>
+              <li>Statement of Applicability (SoA) opstellen</li>
+              <li>Risicobehandelingsplan met concrete maatregelen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="dienst-title">Pre-audit &amp; Certificeringsbegeleiding</div>
+        <p class="dienst-desc">Dry run voorafgaand aan de certificeringsaudit. Wij bereiden uw organisatie voor zodat u de externe audit met vertrouwen tegemoet gaat.</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Simulatie van het externe certificeringsaudit</li>
+              <li>Identificatie van resterende gaps en risico's</li>
+              <li>Begeleiding bij het oplossen van bevindingen</li>
+              <li>Coaching van medewerkers voor auditgesprekken</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dienst-card">
+        <div class="dienst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div class="dienst-title">Compliance Advies</div>
+        <p class="dienst-desc">Advies over implementatie van beheersmaatregelen, NIS2-vereisten en afstemming met wet- en regelgeving rondom informatiebeveiliging.</p>
+        <a class="dienst-link" onclick="this.nextElementSibling.classList.toggle('open');this.closest('.dienst-card').classList.toggle('expanded')">Meer informatie →</a>
+        <div class="dienst-detail">
+          <div class="dienst-detail-inner">
+            <ul>
+              <li>Advies over Annex A beheersmaatregelen</li>
+              <li>NIS2-readiness beoordeling en begeleiding</li>
+              <li>Afstemming met AVG en sectorspecifieke regelgeving</li>
+              <li>Ondersteuning bij leverancierseisen en aanbestedingen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── WERKWIJZE ──────────────────────────────────── -->
+<section id="werkwijze">
+  <div class="section-inner">
+    <div class="werkwijze-grid">
+      <div>
+        <div class="section-label">Hoe wij werken</div>
+        <h2 class="section-title">Een heldere aanpak,<br />van A tot Z</h2>
+        <p class="section-desc">Geen zweverig advies. Wij werken gestructureerd, transparant en doelgericht — zodat u altijd weet waar u aan toe bent.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-line"></div>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Intake &amp; Scopebepaling</div>
+              <p class="step-desc">Kennismaking en bepaling van de auditscope. Wat valt er binnen het ISMS? Welke processen, locaties en systemen zijn betrokken?</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"></div>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Nulmeting &amp; Analyse</div>
+              <p class="step-desc">Wij analyseren de huidige staat van uw informatiebeveiliging aan de hand van documentreviews, interviews en technische controles.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"></div>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Audituitvoering</div>
+              <p class="step-desc">Systematische audit van alle relevante clausules en Annex A-beheersmaatregelen. Bevindingen worden direct gedocumenteerd.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"></div>
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Rapportage &amp; Debriefing</div>
+              <p class="step-desc">Helder auditrapport met bevindingen, non-conformiteiten en aanbevelingen. Mondelinge toelichting aan management en betrokken teams.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Opvolging &amp; Verbetering</div>
+              <p class="step-desc">Begeleiding bij het opstellen en uitvoeren van correctieve maatregelen. Optioneel: follow-up audit om voortgang te verifiëren.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="werkwijze-visual">
+        <div class="visual-card">
+          <div class="visual-card-title">Wat u kunt verwachten</div>
+
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Audits conform ISO 27001:2022 en ISO 19011
+          </div>
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Onafhankelijk, objectief en zonder belangenconflict
+          </div>
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Heldere rapportage — ook voor niet-technici
+          </div>
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Praktische aanbevelingen, direct toepasbaar
+          </div>
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Beschikbaar in Nederland &amp; België
+          </div>
+          <div class="visual-check-item">
+            <div class="check-icon">✓</div>
+            Oplevering van auditdossier inclusief bewijsmateriaal
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OVER ONS ───────────────────────────────────── -->
+<section id="over">
+  <div class="section-inner">
+    <div class="over-bg-image">
+      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80" alt="Haas Audits — modern kantoor interieur" loading="lazy" />
+    </div>
+    <div class="over-grid">
+      <div></div>
+      <div class="over-content">
+        <div class="section-label">Over ons</div>
+        <h2 class="section-title">Welkom bij Haas Audits.<br />Dit is hoe wij werken.</h2>
+        <p class="over-highlight">
+          Wij geloven dat informatiebeveiliging begint met vertrouwen. Geen afvinklijsten, maar een partner die naast u staat — voor, tijdens en na de audit.
+        </p>
+
+        <div class="principles-grid">
+          <div class="principle-item">
+            <div class="principle-q">Waarom kiezen organisaties voor ons?</div>
+            <div class="principle-a">Omdat wij technische diepgang combineren met een pragmatische aanpak. Geen papieren tijgers, maar werkbare oplossingen.</div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-q">Hoe voeren wij onze audits uit?</div>
+            <div class="principle-a">Onafhankelijk, objectief en altijd met oog voor de menselijke kant. Wij auditen processen, niet personen.</div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-q">Wat maakt onze aanpak anders?</div>
+            <div class="principle-a">Wij leveren geen generiek rapport. Elke bevinding is concreet, toepasbaar en afgestemd op uw sector en risicoprofiel.</div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-q">Voor wie werken wij?</div>
+            <div class="principle-a">IT-dienstverleners, SaaS-bedrijven, MSP's en tech scale-ups — organisaties waar informatiebeveiliging het verschil maakt.</div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-q">Welke normen beheersen wij?</div>
+            <div class="principle-a">ISO 27001, ISO 27005, ISO 19011, NIS2 en BIO. Wij blijven continu op de hoogte van wijzigingen in wet- en regelgeving rondom informatiebeveiliging.</div>
+          </div>
+          <div class="principle-item">
+            <div class="principle-q">Wat kunt u van ons verwachten?</div>
+            <div class="principle-a">Transparante communicatie, heldere rapportage en een partner die meedenkt — ook na de audit.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTOREN ───────────────────────────────────── -->
+<section id="sectoren">
+  <div class="grid-overlay"></div>
+  <div class="section-inner">
+    <div class="section-label">Onze focus</div>
+    <h2 class="section-title">Gespecialiseerd in<br />de IT-sector</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.5)">
+      Wij begrijpen de technische complexiteit van IT-organisaties. Daarom richten wij ons specifiek op de sectoren waar informatiebeveiliging het verschil maakt.
+    </p>
+
+    <div class="sectoren-grid">
+
+      <div class="sector-card">
+        <span class="sector-icon">☁️</span>
+        <div class="sector-title">SaaS &amp; Cloud Providers</div>
+        <p class="sector-desc">Cloud-native organisaties die klanten willen overtuigen dat hun data veilig is. ISO 27001 als vertrouwensbewijs richting enterprise klanten.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🖥️</span>
+        <div class="sector-title">Managed Service Providers</div>
+        <p class="sector-desc">MSP's die verantwoordelijk zijn voor de IT-omgeving van hun klanten en moeten aantonen dat hun eigen beveiliging op orde is.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">⚙️</span>
+        <div class="sector-title">Software Development</div>
+        <p class="sector-desc">Ontwikkelbedrijven die secure development practices willen borgen en klanten zekerheid willen bieden over hun informatiebeveiliging.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🏢</span>
+        <div class="sector-title">IT-dienstverleners</div>
+        <p class="sector-desc">Consultancy- en implementatiebedrijven die via ISO 27001 hun marktpositie versterken en aanbestedingseisen vervullen.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🗄️</span>
+        <div class="sector-title">Hosting &amp; Data Centers</div>
+        <p class="sector-desc">Infrastructuurpartijen waar beschikbaarheid en beveiliging van klantdata de kern van het businessmodel vormen.</p>
+      </div>
+
+      <div class="sector-card">
+        <span class="sector-icon">🚀</span>
+        <div class="sector-title">Tech Scale-ups</div>
+        <p class="sector-desc">Snelgroeiende techbedrijven die ISO 27001 nodig hebben om enterprise deals te sluiten en investeerders te overtuigen.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ───────────────────────────────── -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom: 16px;">
+      <div class="section-label" style="justify-content:center;">Wat anderen zeggen</div>
+      <h2 class="section-title">Resultaten die spreken<br />voor zichzelf</h2>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">
+          De audit was grondig maar ook constructief. Niet alleen bevindingen op papier, maar echte begeleiding naar verbetering. We hebben de certificering op de eerste poging gehaald.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="M. Vermeer" loading="lazy" /></div>
+          <div>
+            <div class="author-name">M. Vermeer</div>
+            <div class="author-role">IT-manager, Technisch Dienstverlener</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">
+          Eindelijk een auditor die de techniek écht begrijpt. De risicobeoordeling was scherp en de rapportage was begrijpelijk voor ons management. Sterk aanbevolen.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80" alt="J. De Smedt" loading="lazy" /></div>
+          <div>
+            <div class="author-name">J. De Smedt</div>
+            <div class="author-role">CISO, Zorginstelling België</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">
+          Als bouwbedrijf dachten we dat ISO 27001 niet voor ons was. Na de nulmeting bleek het heel haalbaar. De aanpak was pragmatisch en volledig afgestemd op onze sector.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80" alt="R. Klaasen" loading="lazy" /></div>
+          <div>
+            <div class="author-name">R. Klaasen</div>
+            <div class="author-role">Directeur, Infra &amp; Bouwbedrijf</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT / CTA ──────────────────────────────── -->
+<section id="contact">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content:center; color:var(--blue-l);">Contact</div>
+    <h2 class="cta-title">
+      Klaar om informatiebeveiliging<br />serieus te nemen?
+    </h2>
+    <p class="cta-desc">
+      Plan een vrijblijvend intakegesprek. Wij luisteren naar uw situatie en vertellen eerlijk wat u kunt verwachten — zonder verkooppraatje.
+    </p>
+    <div class="contact-options">
+      <a href="mailto:info@haasaudits.com" class="contact-option">
+        <span class="contact-option-icon">✉️</span>
+        <div class="contact-option-label">E-mail</div>
+        <div class="contact-option-value">info@haasaudits.com</div>
+      </a>
+      <a href="tel:+31685801408" class="contact-option">
+        <span class="contact-option-icon">📞</span>
+        <div class="contact-option-label">Telefoon</div>
+        <div class="contact-option-value">+31 6 85 80 14 08</div>
+      </a>
+      <a href="https://www.linkedin.com/in/raoulhaas" target="_blank" class="contact-option">
+        <span class="contact-option-icon">💼</span>
+        <div class="contact-option-label">LinkedIn</div>
+        <div class="contact-option-value">Profiel bekijken</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── INTAKE MODAL ───────────────────────────────── -->
+<div class="modal-overlay" id="intakeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-header" id="modalHeader">
+      <div class="modal-title">Plan uw gratis intake</div>
+      <div class="modal-subtitle">Vul uw gegevens in en wij nemen binnen 24 uur contact met u op.</div>
+    </div>
+    <form class="modal-form" id="modalForm" action="https://formsubmit.co/info@haasaudits.com" method="POST">
+      <input type="hidden" name="_subject" value="Nieuwe intake aanvraag — Haas Audits">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_autoresponse" value="Bedankt voor uw aanvraag! Wij hebben uw bericht ontvangen en nemen binnen 24 uur contact met u op. Met vriendelijke groet, Haas Audits">
+      <input type="text" name="_honey" style="display:none">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Naam *</label>
+          <input type="text" name="naam" class="form-input" placeholder="Uw volledige naam" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bedrijf *</label>
+          <input type="text" name="bedrijf" class="form-input" placeholder="Bedrijfsnaam" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">E-mail *</label>
+          <input type="email" name="email" class="form-input" placeholder="uw@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefoon</label>
+          <input type="tel" name="telefoon" class="form-input" placeholder="+31 6...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Waar kunnen wij u mee helpen?</label>
+        <textarea name="bericht" class="form-input" placeholder="Bijv. wij willen starten met ISO 27001 certificering..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Verstuur aanvraag</button>
+      <div class="form-note">Wij reageren binnen 24 uur · Geen verplichtingen</div>
+    </form>
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Aanvraag ontvangen!</div>
+      <div class="success-text">Bedankt voor uw interesse. Wij nemen binnen 24 uur contact met u op.<br>U ontvangt ook een bevestiging per e-mail.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-big">
+          <span class="footer-logo-text">Haas</span>
+          <span class="footer-logo-text footer-logo-accent">Audits</span>
+        </div>
+        <p class="footer-brand-desc">
+          Gecertificeerde ISO 27001 auditors.<br />Actief in Nederland en België.<br />Gespecialiseerd in de IT-sector.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Diensten</div>
+        <ul class="footer-links">
+          <li><a href="#diensten">Gap-analyse</a></li>
+          <li><a href="#diensten">Interne Audits</a></li>
+          <li><a href="#diensten">ISMS Opzet</a></li>
+          <li><a href="#diensten">Pre-audit</a></li>
+          <li><a href="#diensten">Compliance Advies</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Sectoren</div>
+        <ul class="footer-links">
+          <li><a href="#sectoren">SaaS &amp; Cloud</a></li>
+          <li><a href="#sectoren">MSP's</a></li>
+          <li><a href="#sectoren">Software Development</a></li>
+          <li><a href="#sectoren">IT-dienstverleners</a></li>
+          <li><a href="#sectoren">Tech Scale-ups</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#over">Over ons</a></li>
+          <li><a href="#contact">Plan een gesprek</a></li>
+          <li><a href="mailto:info@haasaudits.com">E-mail sturen</a></li>
+          <li><a href="https://www.linkedin.com/in/raoulhaas" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Haas Audits — Alle rechten voorbehouden</div>
+      <div>Nederland &amp; België · KvK: XXXXXXXX · BTW: NLXXXXXXXXB01</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark JS as loaded for animation fallback
+  document.body.classList.add('js-loaded');
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20 ? '0 2px 40px rgba(0,0,0,.3)' : 'none';
+  });
+
+  // Hamburger menu
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Menu sluiten' : 'Menu openen');
+  });
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll-spy: highlight active nav link
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 100;
+      if (window.scrollY >= top) current = section.getAttribute('id');
+    });
+    navItems.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'white' : '';
+    });
+  });
+
+  // Animate elements on scroll with stagger
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        const delay = el.target.dataset.delay || 0;
+        setTimeout(() => el.target.classList.add('is-visible'), delay);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Add stagger delays to card grids
+  document.querySelectorAll('.diensten-grid, .sectoren-grid, .testimonials-grid').forEach(grid => {
+    grid.querySelectorAll('.dienst-card, .sector-card, .testimonial-card').forEach((el, i) => {
+      el.dataset.delay = i * 80;
+      observer.observe(el);
+    });
+  });
+
+  document.querySelectorAll('.step').forEach((el, i) => {
+    el.dataset.delay = i * 120;
+    observer.observe(el);
+  });
+
+  // Animated counters
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const start = performance.now();
+        const animate = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // Audit progress: hover=80→100%+CTA, leave=reset to 80%
+  const auditDoc = document.getElementById('auditDoc');
+  const auditCta = document.getElementById('auditCta');
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('progressPct');
+  let hovering = false;
+  let ctaTimer = null;
+  let rafId = null;
+
+  function animatePct(from, to, duration) {
+    if (rafId) cancelAnimationFrame(rafId);
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(from + (to - from) * eased);
+      pct.textContent = val + '%';
+      if (p < 1 && hovering === (to === 100)) {
+        rafId = requestAnimationFrame(step);
+      }
+    };
+    rafId = requestAnimationFrame(step);
+  }
+
+  if (auditDoc) {
+    auditDoc.addEventListener('mouseenter', () => {
+      hovering = true;
+      if (ctaTimer) clearTimeout(ctaTimer);
+
+      // Bar to 100%
+      fill.style.transition = 'width 1.5s cubic-bezier(.25,.46,.45,.94)';
+      fill.style.width = '100%';
+      animatePct(80, 100, 1500);
+
+      // A.9 → pass
+      setTimeout(() => {
+        if (!hovering) return;
+        const lc = auditDoc.querySelector('.audit-line:last-child .audit-check');
+        if (lc) { lc.classList.remove('pending'); lc.classList.add('done'); lc.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>'; }
+        const ls = auditDoc.querySelector('.audit-line:last-child .audit-line-status');
+        if (ls) { ls.textContent = 'Pass'; ls.classList.remove('status-review'); ls.classList.add('status-pass'); }
+      }, 800);
+
+      // CTA after 2s
+      ctaTimer = setTimeout(() => {
+        if (hovering) auditCta.classList.add('show');
+      }, 2000);
+    });
+
+    auditDoc.addEventListener('mouseleave', () => {
+      hovering = false;
+      if (ctaTimer) clearTimeout(ctaTimer);
+
+      // Bar back to 80%
+      fill.style.transition = 'width 1s ease';
+      fill.style.width = '80%';
+      animatePct(100, 80, 1000);
+
+      // A.9 → review
+      const lc = auditDoc.querySelector('.audit-line:last-child .audit-check');
+      if (lc) { lc.classList.remove('done'); lc.classList.add('pending'); lc.innerHTML = ''; }
+      const ls = auditDoc.querySelector('.audit-line:last-child .audit-line-status');
+      if (ls) { ls.textContent = 'Review'; ls.classList.remove('status-pass'); ls.classList.add('status-review'); }
+
+      auditCta.classList.remove('show');
+    });
+  }
+
+  // Intake modal
+  function openModal() {
+    document.getElementById('intakeModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('intakeModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.getElementById('intakeModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Intercept form submit for success state
+  document.getElementById('modalForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(() => {
+      document.getElementById('modalForm').classList.add('hidden');
+      document.getElementById('modalHeader').classList.add('hidden');
+      document.getElementById('modalSuccess').classList.add('show');
+      setTimeout(() => closeModal(), 4000);
+    }).catch(() => {
+      document.getElementById('modalForm').classList.add('hidden');
+      document.getElementById('modalHeader').classList.add('hidden');
+      document.getElementById('modalSuccess').classList.add('show');
+      setTimeout(() => closeModal(), 4000);
+    });
+  });
+
+  // Wire up all CTA buttons
+  document.querySelectorAll('a[href="#contact"], .btn-primary, .audit-cta a').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Parallax effect on hero blobs
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.querySelectorAll('.mesh-blob').forEach((blob, i) => {
+      const speed = (i + 1) * 0.5;
+      blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
+  });
+</script>
+
+</body>
+</html>
