@@ -1,0 +1,16 @@
+# Credentials en secrets
+.env
+*.env
+*.key
+*.pem
+*-SECRETS.md
+
+# OS bestanden
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
