@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(bash /c/Users/raoul/.claude/scripts/auto-commit-on-stop.sh)",
-      "Bash(echo \"exit=$?\")"
-    ]
-  }
-}
