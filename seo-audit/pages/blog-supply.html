@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0D9488" />
+  <script src="/analytics.js"></script>
+  <title>Supply chain attacks voor MKB: 5 lessen uit MOVEit, SolarWinds en XZ Utils | Annex27</title>
+  <meta name="description" content="Waarom zelfs goed beveiligd MKB slachtoffer wordt van leverancierscompromissen, en hoe ISO 27001 A.5.19-23 dit deels afvangt. Met concrete cases en bronnen." />
+  <meta name="keywords" content="supply chain attack MKB, MOVEit SolarWinds XZ Utils, ISO 27001 leveranciers, third party risk management, A.5.19, NCSC supply chain" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://annex27.nl/blog/supply-chain-attacks-mkb" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Supply chain attacks voor MKB: 5 lessen uit de grote incidenten" />
+  <meta property="og:description" content="Van MOVEit tot XZ Utils — waarom leverancierscompromissen de nieuwe ransomware zijn en hoe u zich beschermt." />
+  <meta property="og:image" content="https://annex27.nl/og-image.svg" />
+  <meta property="article:author" content="Raoul Haas" />
+  <meta property="article:published_time" content="2026-04-19T11:00:00+02:00" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Supply chain attacks voor MKB: 5 lessen uit MOVEit, SolarWinds en XZ Utils","datePublished":"2026-04-19","author":{"@type":"Person","name":"Raoul Haas"},"publisher":{"@type":"Organization","name":"Annex27"}}
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#FAFAFA;--surface:#FFF;--bg-warm:#F5F3EF;--border:#E5E5E5;--border-light:#F0F0F0;--text-primary:#0F172A;--text-secondary:#475569;--text-muted:#94A3B8;--accent:#0D9488;--accent-light:#CCFBF1;--dark:#0c0f1a;--warning:#D97706;--danger:#dc2626;--radius:10px;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text-secondary);line-height:1.75;-webkit-font-smoothing:antialiased;}
+    .container{max-width:780px;margin:0 auto;padding:0 24px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);height:64px;display:flex;align-items:center;padding:0 5%;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1120px;margin:0 auto;}
+    .nav-logo{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-primary);text-decoration:none;letter-spacing:-0.03em;}
+    .nav-logo span{color:var(--accent);}
+    .nav-back{display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--text-secondary);text-decoration:none;font-weight:500;}
+    .nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+    .hero{padding:130px 0 56px;background:var(--dark);color:white;}
+    .meta-row{display:flex;gap:14px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;}
+    .meta-row .pill{background:rgba(20,184,166,0.15);color:#5eead4;padding:4px 10px;border-radius:20px;}
+    .hero h1{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-0.02em;margin-bottom:14px;}
+    .hero p.lead{font-size:1.05rem;color:rgba(255,255,255,0.65);}
+    article{padding:48px 0 80px;}
+    .tldr{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:20px 24px;margin-bottom:36px;}
+    .tldr-label{font-size:0.74rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .tldr p{margin:0;color:var(--text-primary);font-weight:500;}
+    article h2{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);margin:42px 0 14px;letter-spacing:-0.02em;}
+    article h3{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:26px 0 8px;}
+    article p{margin-bottom:16px;}
+    article ul,article ol{margin:0 0 18px 22px;}
+    article li{margin-bottom:6px;}
+    article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+    article strong{color:var(--text-primary);}
+    article table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:0.92rem;}
+    article th,article td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border-light);vertical-align:top;}
+    article th{background:var(--surface);font-weight:700;color:var(--text-primary);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;}
+    .case{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin:22px 0;}
+    .case-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+    .case-tag{font-size:0.72rem;font-weight:800;padding:3px 10px;border-radius:99px;letter-spacing:0.08em;text-transform:uppercase;}
+    .case-head h3{margin:0;font-family:'Sora',sans-serif;font-size:1.1rem;color:var(--text-primary);}
+    .case p{margin-bottom:10px;}
+    .case p:last-child{margin-bottom:0;}
+    .callout{background:var(--bg-warm);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:20px 0;}
+    .callout strong{color:var(--text-primary);}
+    .sources{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:32px 0;font-size:0.86rem;}
+    .sources h4{font-family:'Sora',sans-serif;font-size:0.9rem;color:var(--text-primary);margin-bottom:10px;letter-spacing:0.02em;}
+    .sources ol{margin:0 0 0 22px;}
+    .sources li{margin-bottom:6px;line-height:1.55;}
+    .end-cta{background:linear-gradient(135deg,#0c0f1a 0%,#1e293b 100%);color:white;border-radius:14px;padding:32px;margin-top:48px;text-align:center;}
+    .end-cta h3{font-family:'Sora',sans-serif;color:white;font-size:1.3rem;margin-bottom:8px;}
+    .end-cta p{color:rgba(255,255,255,0.7);margin-bottom:18px;}
+    .end-cta a{display:inline-block;background:#14b8a6;color:white;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;}
+    footer{background:var(--surface);border-top:1px solid var(--border-light);padding:40px 0;font-size:0.84rem;color:var(--text-muted);}
+    footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+    footer a{color:var(--text-secondary);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">annex<span>27</span></a>
+    <a href="/blog" class="nav-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Terug naar blog</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="meta-row"><span class="pill">Supply Chain</span><span>19 april 2026</span><span>·</span><span>10 min lezen</span></div>
+    <h1>Supply chain attacks voor MKB: 5 lessen uit MOVEit, SolarWinds en XZ Utils</h1>
+    <p class="lead">De grootste cyberincidenten van de afgelopen jaren hadden één ding gemeen: het slachtoffer deed zelf niks fout. Een vertrouwde leverancier werd gecompromitteerd, en honderden tot duizenden klanten werden mee naar beneden gesleurd. Wat u kunt doen voor uw MKB.</p>
+  </div>
+</section>
+
+<article>
+  <div class="container">
+
+    <div class="tldr">
+      <div class="tldr-label">TL;DR</div>
+      <p>Supply chain attacks stegen <strong>742% tussen 2019 en 2024</strong> volgens Sonatype <sup>[1]</sup>. Niet uw security, maar die van uw leverancier bepaalt inmiddels uw risico. ISO 27001 Annex A.5.19-23 (supplier management) is daarmee géén administratief hoofdstuk meer — het is je tweede verdedigingslinie. We analyseren drie incidenten (MOVEit 2023, SolarWinds 2020, XZ Utils 2024) en destilleren vijf concrete lessen voor MKB.</p>
+    </div>
+
+    <p>In mei 2023 ontdekte Progress Software een SQL-injection-kwetsbaarheid in <strong>MOVEit Transfer</strong>, een file-transfer-product dat door duizenden Europese organisaties werd gebruikt voor het veilig uitwisselen van gevoelige documenten. Binnen vier weken stal de Russische Cl0p-groep data van meer dan 2.700 organisaties wereldwijd — waaronder banken, universiteiten, pensioenfondsen en MKB-leveranciers <sup>[2]</sup>.</p>
+
+    <p>Het bijzondere: geen van die 2.700 slachtoffers had zelf een security-fout gemaakt. Ze hadden simpelweg een vertrouwd product geïnstalleerd zoals je dat van je leverancier mag verwachten. En juist dat maakt supply chain attacks zo verraderlijk voor MKB-organisaties die noodgedwongen afhankelijk zijn van externe tools.</p>
+
+    <h2>Drie incidenten die de norm hebben veranderd</h2>
+
+    <div class="case">
+      <div class="case-head">
+        <span class="case-tag" style="background:rgba(220,38,38,0.12);color:#991B1B;">Software supply chain · 2023</span>
+      </div>
+      <h3>MOVEit Transfer — Cl0p's ransomware-bonanza</h3>
+      <p><strong>Aanval:</strong> Ransomware-groep Cl0p exploiteerde CVE-2023-34362, een SQLi-bug in MOVEit Transfer. De groep had de kwetsbaarheid <em>lang voor publicatie</em> gevonden en kon tweeën kalm data exfiltreren voordat Progress een patch uitbracht. <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a" target="_blank" rel="noopener">CISA advisory AA23-158A</a></p>
+      <p><strong>Impact:</strong> 2.773+ organisaties getroffen, 94 miljoen records gestolen, geschatte totale kosten $12 miljard. Nederlandse slachtoffers: Shell, Deloitte, de Nederlandse regering (via een leverancier), en tientallen MKB-organisaties <sup>[3]</sup>.</p>
+      <p><strong>Les:</strong> file-transfer-producten zijn high-value targets. MKB-gebruikers konden niks doen — behalve <em>weten dat ze MOVEit gebruikten</em>. Wie geen asset-register had, ontdekte soms pas na 6 weken dat ze getroffen waren.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <span class="case-tag" style="background:rgba(217,119,6,0.12);color:#7C2D12;">Software supply chain · 2020</span>
+      </div>
+      <h3>SolarWinds — state-sponsored door APT29 (Rusland)</h3>
+      <p><strong>Aanval:</strong> APT29 (Cozy Bear) compromitteerde de build-omgeving van SolarWinds Orion — een netwerkmonitoring-platform. Ze injecteerden een backdoor (SUNBURST) in legitieme software-updates. 18.000 organisaties installeerden de trojanized update in 2020 <sup>[4]</sup>.</p>
+      <p><strong>Impact:</strong> o.a. US Treasury, Pentagon, Microsoft, maar ook tientallen Europese overheden en MKB-MSP's. De aanvallers waren 9+ maanden binnen voordat FireEye ze ontdekte. Totale kosten wereldwijd geschat op $100 miljard+.</p>
+      <p><strong>Les:</strong> een leverancier die je <em>updates mag pushen</em> naar je netwerk is feitelijk een "trusted insider" — met alle risico's van dien. Dependency-updates mogen nooit kritiekloos doorgevoerd worden.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <span class="case-tag" style="background:rgba(13,148,136,0.12);color:#0F766E;">Open-source · 2024</span>
+      </div>
+      <h3>XZ Utils backdoor — de jaren lange infiltratie</h3>
+      <p><strong>Aanval:</strong> in maart 2024 ontdekte Microsoft-engineer Andres Freund dat XZ Utils (een veelgebruikte Linux-compressielibrary) was gecompromitteerd. De "maintainer" Jia Tan had <em>2+ jaar lang</em> als vrijwillige bijdrager gewerkt aan het open-source project — om uiteindelijk een backdoor in te bouwen die SSH-authenticatie op Debian- en Red Hat-systemen omzeilde <sup>[5]</sup>.</p>
+      <p><strong>Impact:</strong> dankzij toeval bijna niks, want het werd ontdekt voordat de kwaadaardige versie in stable Linux-releases terechtkwam. Maar: open-source projecten die <em>onderhouden worden door één of twee volunteer-maintainers</em> zijn structureel kwetsbaar voor social-engineering over jaren heen.</p>
+      <p><strong>Les:</strong> open-source dependencies die "onderhoudloze" compressieroutines of utility-functies leveren krijgen onverdiend veel vertrouwen. De SBOM (Software Bill of Materials) is sinds 2024 géén hygiëne-praktijk meer maar een compliance-verplichting.</p>
+    </div>
+
+    <h2>5 concrete lessen voor MKB</h2>
+
+    <h3>1. Uw supply chain zijn álle integraties, niet alleen "leveranciers"</h3>
+    <p>Een supply-chain-risico is elke externe component of partij met toegang tot uw systemen of data. Dat omvat niet alleen uw boekhoudpakket, maar ook:</p>
+    <ul>
+      <li>SaaS-tooling (Office 365, Google Workspace, Slack, HubSpot, Zendesk)</li>
+      <li>Open-source dependencies in uw code (npm, PyPI, NuGet)</li>
+      <li>Browser-extensies bij medewerkers</li>
+      <li>Managed Service Providers (MSP) met RDP/VPN-toegang</li>
+      <li>Hardware met firmware-updates (firewalls, switches, printers)</li>
+      <li>Externe freelancers met systeemtoegang</li>
+    </ul>
+    <p>Een typisch MKB van 25 fte heeft volgens BetterCloud's 2025 State of SaaS Ops-rapport gemiddeld <strong>79 actieve SaaS-applicaties</strong>, waarvan 43% "shadow-IT" (niet door IT goedgekeurd) <sup>[6]</sup>.</p>
+
+    <h3>2. Registreer iedere leverancier met hun criticality-rating</h3>
+    <p>ISO 27001 A.5.19 eist een leveranciersregister. Dat is geen spreadsheet-oefening — het is uw triage-lijst bij een incident. Per leverancier minimaal:</p>
+    <ul>
+      <li>Wat levert de partij (dienst/product)</li>
+      <li>Welke data zien ze of wisselen ze (classificatie)</li>
+      <li>Welke systeemtoegang hebben ze (Admin / gebruiker / geen)</li>
+      <li>Wat is de <strong>blast radius</strong> als deze partij gecompromitteerd wordt?</li>
+      <li>Contactgegevens CISO/security-team van de leverancier</li>
+      <li>Laatste datum security-assessment of SOC 2 / ISO 27001-certificaat</li>
+    </ul>
+
+    <h3>3. Eis aantoonbare security van kritieke leveranciers</h3>
+    <p>Voor elke leverancier die (a) toegang heeft tot productie-data, (b) cruciaal is voor uw bedrijfsvoering of (c) waar compromittering tot grote schade zou leiden: eis aantoonbare security-maatregelen.</p>
+    <p>Dat betekent niet "vertrouwen op de website-claims", maar:</p>
+    <ul>
+      <li>ISO 27001-certificaat (niet alleen "compliant" — het echte certificaatnummer)</li>
+      <li>SOC 2 Type II rapport (minimaal jaarlijks vernieuwd)</li>
+      <li>Hun eigen IRP + bereid zijn om binnen 24u te melden bij incident</li>
+      <li>Penetration test-rapport (minimaal jaarlijks, door een externe partij)</li>
+      <li>VWO/DPA voor persoonsgegevens</li>
+    </ul>
+
+    <h3>4. Architectuur-beslissingen: least privilege voor leveranciers</h3>
+    <p>De bitterste les van SolarWinds: een leverancier met admin-access tot uw netwerk is een tijdbom. Drie patterns die werken:</p>
+    <ul>
+      <li><strong>Just-in-time toegang</strong>: leverancier krijgt pas toegang na een ticket + goedkeuring, en alleen tijdens afgesproken window</li>
+      <li><strong>Jump-host / bastion</strong>: alle leveranciers-sessies lopen door een gecontroleerde tussenlaag met session-recording</li>
+      <li><strong>Scheiding van omgevingen</strong>: leveranciers werken in een ontwikkel-/staging-omgeving; productie-push gebeurt door uw eigen team</li>
+    </ul>
+
+    <h3>5. Prepare voor "leverancier X is gehackt"</h3>
+    <p>Uw incident-response plan moet een expliciete <strong>leverancier-compromis procedure</strong> bevatten:</p>
+    <ol>
+      <li>Welke van onze systemen/data raken we mogelijk kwijt als leverancier X wordt gehackt?</li>
+      <li>Hoe isoleren we die leverancier direct (credentials revoken, firewall-rules, API-keys)?</li>
+      <li>Wie informeren we extern (klanten, AP/GBA als er persoonsdata bij betrokken is, CSIRT-NL/CCB onder NIS2)?</li>
+      <li>Wat is ons fallback-proces als we deze leverancier 7-30 dagen moeten missen?</li>
+    </ol>
+    <p>De CCB (België) en NCSC-NL hebben na MOVEit en SolarWinds beide hun supply-chain-guidance geüpdatet in 2024-2025 <sup>[7][8]</sup>. NIS2 Art. 21 lid 4 maakt dit expliciet verplicht voor essentiële en belangrijke entiteiten.</p>
+
+    <div class="callout">
+      <strong>Onze ervaring als Lead Auditor:</strong> bij 80% van de MKB-bedrijven die we in 2025 hebben begeleid, bleek het leveranciersregister onvolledig (gemiddeld 40-60% van de actief gebruikte tools ontbrak). Dat is ook vaak de <em>eerste grote bevinding</em> van een certificerende auditor. Zorg dat u dit register kunt laten zien voordat u aan de audit begint.
+    </div>
+
+    <h2>ISO 27001:2022 supply-chain-controls — wat écht telt</h2>
+
+    <table>
+      <thead><tr><th>Control</th><th>Wat het betekent praktisch</th><th>Waar auditor naar kijkt</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A.5.19</strong> Supplier relationships</td><td>Beleid + register leveranciers met security-vereisten</td><td>Register + steekproef van 3-5 leveranciers: wat is hun status</td></tr>
+        <tr><td><strong>A.5.20</strong> Contracts</td><td>Security-clausules in contracten (SLA, incident-melding, data-deletion, audit-rechten)</td><td>Contract-template + voorbeeld ondertekend exemplaar</td></tr>
+        <tr><td><strong>A.5.21</strong> ICT supply chain</td><td>Specifiek voor technologie-leveranciers: SBOM, patching-SLA, vulnerability-disclosure</td><td>Bewijs van jaarlijkse herbeoordeling + actuele beoordelings-formulier</td></tr>
+        <tr><td><strong>A.5.22</strong> Monitoring</td><td>Periodieke review van leveranciersprestaties + security-postuur</td><td>SLA-rapportages + incidentlog per leverancier</td></tr>
+        <tr><td><strong>A.5.23</strong> Cloud services (nieuw 2022)</td><td>Selectie, gebruik en exit-strategie voor cloud-diensten</td><td>Cloud-security-beleid + register goedgekeurde diensten + exit-plan voor top-3 kritieke cloud-diensten</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wat kunt u deze week doen</h2>
+
+    <ol>
+      <li><strong>Maak een SaaS-inventaris.</strong> Exporteer alle terugkerende abonnementen uit uw boekhouding. Dat is een starter voor uw leveranciersregister — typisch 50-80% van de shadow-IT is op die manier te vinden.</li>
+      <li><strong>Classificeer top-10 kritieke leveranciers.</strong> Wie zou u <em>niet 1 week kunnen missen</em>? Wie heeft toegang tot uw productiedata? Top 10 krijgt eerst een formele assessment.</li>
+      <li><strong>Vraag bij die top-10 om hun security-certificaat/SOC 2.</strong> Als ze het niet hebben — onderneem actie (migratie, contractaanpassing, rating-impact).</li>
+      <li><strong>Documenteer het leveranciers-compromis deel</strong> van uw IRP. Tabletop-oefening later dit kwartaal.</li>
+    </ol>
+
+    <div class="sources">
+      <h4>Bronnen</h4>
+      <ol>
+        <li>Sonatype, "State of the Software Supply Chain 2024" — stijging 742% in supply-chain-aanvallen 2019-2024 (<a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" rel="noopener">sonatype.com</a>).</li>
+        <li>CISA, "CVE-2023-34362 Progress MOVEit Transfer Vulnerability" (<a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a" target="_blank" rel="noopener">cisa.gov</a>).</li>
+        <li>Emsisoft, "Unpacking the MOVEit Breach: Statistics and Analysis" (september 2024, geupdate periodiek) (<a href="https://www.emsisoft.com/en/blog/44123/unpacking-the-moveit-breach-statistics-and-analysis/" target="_blank" rel="noopener">emsisoft.com</a>).</li>
+        <li>CISA, "Advisory on SolarWinds Orion Supply Chain Compromise" AA20-352A (december 2020, geüpdatet) (<a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-352a" target="_blank" rel="noopener">cisa.gov</a>).</li>
+        <li>Andres Freund, "backdoor in upstream xz/liblzma leading to ssh server compromise" (openwall.com, 29 maart 2024) (<a href="https://www.openwall.com/lists/oss-security/2024/03/29/4" target="_blank" rel="noopener">openwall.com</a>).</li>
+        <li>BetterCloud, "2025 State of SaaSOps Report" — gemiddeld aantal SaaS-apps per organisatie (<a href="https://www.bettercloud.com/resources/report/state-of-saasops/" target="_blank" rel="noopener">bettercloud.com</a>).</li>
+        <li>NCSC-NL, "Factsheet Software supply chain security" (2024) (<a href="https://www.ncsc.nl/documenten/factsheets" target="_blank" rel="noopener">ncsc.nl</a>).</li>
+        <li>CCB (België), "Aanbevelingen Supply chain security" (2024) (<a href="https://ccb.belgium.be/en/document" target="_blank" rel="noopener">ccb.belgium.be</a>).</li>
+      </ol>
+    </div>
+
+    <div class="end-cta">
+      <h3>Heeft uw leveranciersregister de audit doorstaan?</h3>
+      <p>Onze gap-analyse toetst A.5.19-23 grondig met concrete evidence-eisen. Persoonlijke Lead Auditor review, €795 eenmalig.</p>
+      <a href="/gap-analyse">Start gratis quickscan &rarr;</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <span>&copy; 2026 Annex27 &middot; KBO 1006.203.170</span>
+    <span>
+      <a href="/blog">Blog</a> &middot;
+      <a href="/privacy">Privacy</a> &middot;
+      <a href="/algemene-voorwaarden">AV</a> &middot;
+      <a href="/trust">Trust</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

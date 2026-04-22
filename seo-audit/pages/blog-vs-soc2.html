@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0D9488" />
+  <script src="/analytics.js"></script>
+  <title>ISO 27001 vs SOC 2: welke past bij een Nederlandse SaaS? | Annex27</title>
+  <meta name="description" content="ISO 27001 of SOC 2? Vergelijking op scope, audit, kosten en klantverwachtingen. Concrete richtlijn voor Nederlandse en Belgische SaaS-bedrijven." />
+  <meta name="keywords" content="ISO 27001 vs SOC 2, SOC 2 Nederland, SOC 2 SaaS Europa, verschil ISO 27001 SOC 2, Trust Service Criteria, Annex A" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://annex27.nl/blog/iso-27001-vs-soc-2" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ISO 27001 vs SOC 2: welke past bij uw Nederlandse SaaS?" />
+  <meta property="og:description" content="Concrete vergelijking voor MKB-SaaS in NL en BE: scope, audit, kosten en wanneer welke keuze logisch is." />
+  <meta property="og:image" content="https://annex27.nl/og-image.svg" />
+  <meta property="article:author" content="Raoul Haas" />
+  <meta property="article:published_time" content="2026-04-12T08:00:00+02:00" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"ISO 27001 vs SOC 2: welke past bij een Nederlandse SaaS?","datePublished":"2026-04-12","author":{"@type":"Person","name":"Raoul Haas"},"publisher":{"@type":"Organization","name":"Annex27"}}
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#FAFAFA;--surface:#FFF;--bg-warm:#F5F3EF;--border:#E5E5E5;--border-light:#F0F0F0;--text-primary:#0F172A;--text-secondary:#475569;--text-muted:#94A3B8;--accent:#0D9488;--accent-light:#CCFBF1;--dark:#0c0f1a;--radius:10px;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text-secondary);line-height:1.75;-webkit-font-smoothing:antialiased;}
+    .container{max-width:780px;margin:0 auto;padding:0 24px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);height:64px;display:flex;align-items:center;padding:0 5%;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1120px;margin:0 auto;}
+    .nav-logo{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-primary);text-decoration:none;letter-spacing:-0.03em;}
+    .nav-logo span{color:var(--accent);}
+    .nav-back{display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--text-secondary);text-decoration:none;font-weight:500;}
+    .nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+
+    .hero{padding:130px 0 56px;background:var(--dark);color:white;}
+    .meta-row{display:flex;gap:14px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;}
+    .meta-row .pill{background:rgba(20,184,166,0.15);color:#5eead4;padding:4px 10px;border-radius:20px;}
+    .hero h1{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-0.02em;margin-bottom:14px;}
+    .hero p.lead{font-size:1.05rem;color:rgba(255,255,255,0.65);}
+
+    article{padding:48px 0 80px;}
+    .tldr{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:20px 24px;margin-bottom:36px;}
+    .tldr-label{font-size:0.74rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .tldr p{margin:0;color:var(--text-primary);font-weight:500;}
+    article h2{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text-primary);margin:42px 0 14px;letter-spacing:-0.02em;}
+    article h3{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:26px 0 8px;}
+    article p{margin-bottom:16px;}
+    article ul,article ol{margin:0 0 18px 22px;}
+    article li{margin-bottom:6px;}
+    article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+    article strong{color:var(--text-primary);}
+    article table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:0.92rem;}
+    article th,article td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border-light);vertical-align:top;}
+    article th{background:var(--surface);font-weight:700;color:var(--text-primary);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;}
+    .callout{background:var(--bg-warm);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:20px 0;}
+    .callout strong{color:var(--text-primary);}
+
+    .end-cta{background:linear-gradient(135deg,#0c0f1a 0%,#1e293b 100%);color:white;border-radius:14px;padding:32px;margin-top:48px;text-align:center;}
+    .end-cta h3{font-family:'Sora',sans-serif;color:white;font-size:1.3rem;margin-bottom:8px;}
+    .end-cta p{color:rgba(255,255,255,0.7);margin-bottom:18px;}
+    .end-cta a{display:inline-block;background:#14b8a6;color:white;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;}
+
+    footer{background:var(--surface);border-top:1px solid var(--border-light);padding:40px 0;font-size:0.84rem;color:var(--text-muted);}
+    footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+    footer a{color:var(--text-secondary);text-decoration:none;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">annex<span>27</span></a>
+    <a href="/blog" class="nav-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Terug naar blog</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="meta-row"><span class="pill">Vergelijking</span><span>12 april 2026</span><span>·</span><span>7 min lezen</span></div>
+    <h1>ISO 27001 vs SOC 2: welke past bij een Nederlandse SaaS?</h1>
+    <p class="lead">De keuze hangt van uw klanten af — niet van wat u "cooler" vindt klinken. Praktische richtlijn voor MKB-SaaS in Nederland en België, met concrete beslisregels.</p>
+  </div>
+</section>
+
+<article>
+  <div class="container">
+
+    <div class="tldr">
+      <div class="tldr-label">TL;DR</div>
+      <p>Verkoopt u vooral in Europa: <strong>ISO 27001</strong>. Heeft u VS-klanten die SOC 2 vragen: doe <strong>beide</strong> (slimme volgorde: ISO eerst, SOC 2 erbovenop). Start zelden met SOC 2 alleen — in Europa wordt ISO beter herkend en is de audit-infrastructuur breder beschikbaar.</p>
+    </div>
+
+    <p>We krijgen de vraag wekelijks: "We starten met een compliance-traject — moeten we voor ISO 27001 of SOC 2 gaan?" Hieronder de feiten en een concrete beslisregel.</p>
+
+    <h2>Wat zijn het, kort</h2>
+
+    <h3>ISO/IEC 27001:2022</h3>
+    <p>Internationale standaard (ISO + IEC) voor informatiebeveiliging. Gedefinieerd rond een <strong>Information Security Management System</strong> (ISMS): een systematische aanpak die u implementeert, documenteert en continu verbetert. De norm bevat 93 "Annex A" controls die u toepast (of gemotiveerd uitsluit in uw <em>Statement of Applicability</em>).</p>
+    <p>Audit door een <strong>geaccrediteerde certificerende instantie</strong> leidt tot een <strong>certificaat</strong> dat 3 jaar geldig is.</p>
+
+    <h3>SOC 2 (Type I of II)</h3>
+    <p>Ontwikkeld door het <strong>American Institute of Certified Public Accountants (AICPA)</strong>. Geen internationale standaard, maar een VS-accountancy-kader. Gebaseerd op vijf <strong>Trust Service Criteria</strong>: Security (verplicht), Availability, Processing Integrity, Confidentiality, Privacy (kiest u op basis van scope).</p>
+    <ul>
+      <li><strong>Type I</strong>: momentopname. Ontwerp van controls op één datum.</li>
+      <li><strong>Type II</strong>: tijdvak (meestal 6-12 maanden). Controls moeten daadwerkelijk gewerkt hebben.</li>
+    </ul>
+    <p>Audit door een <strong>licensed CPA firm</strong> leidt tot een <strong>attestation report</strong> (geen certificaat). Er is geen vaste vervaldatum, maar reports worden jaarlijks vernieuwd omdat klanten recente reports vragen.</p>
+
+    <h2>Directe vergelijking</h2>
+
+    <table>
+      <thead><tr><th>Aspect</th><th>ISO 27001</th><th>SOC 2</th></tr></thead>
+      <tbody>
+        <tr><td>Oorsprong</td><td>ISO (internationaal)</td><td>AICPA (VS)</td></tr>
+        <tr><td>Output</td><td>Certificaat (3 jr geldig)</td><td>Attestation report (~1 jr)</td></tr>
+        <tr><td>Auditor</td><td>Geaccrediteerde CI (DNV, Kiwa, BSI...)</td><td>Licensed CPA (Deloitte, EY, regionale firms)</td></tr>
+        <tr><td>Structuur</td><td>ISMS + 93 Annex A controls</td><td>5 Trust Service Criteria</td></tr>
+        <tr><td>Documentatie</td><td>Zwaarder, formele SoA verplicht</td><td>Flexibeler, bedrijfseigen controls mogelijk</td></tr>
+        <tr><td>Europese herkenning</td><td>Zeer sterk</td><td>Matig, groeit in tech</td></tr>
+        <tr><td>Amerikaanse herkenning</td><td>Matig, stijgt</td><td>De-facto standaard voor SaaS</td></tr>
+        <tr><td>Kosten jaar 1 (MKB 25 fte)</td><td>€15.000 – €25.000 totaal</td><td>€25.000 – €60.000 totaal</td></tr>
+        <tr><td>Kosten vervolgjaren</td><td>€3.000 – €5.000 (surveillance)</td><td>€18.000 – €40.000 (jaarlijkse Type II)</td></tr>
+        <tr><td>Doorlooptijd eerste certificaat/report</td><td>4-9 maanden</td><td>6-18 maanden (Type II vergt 6+ mnd gewerkt)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Niet triviaal:</strong> SOC 2 Type II is structureel duurder omdat het jaarlijks vernieuwd wordt met een volledig audit-traject. ISO 27001 kent goedkopere surveillance in tussenjaren.
+    </div>
+
+    <h2>Wanneer kiest u ISO 27001?</h2>
+    <ul>
+      <li>Uw klanten zitten primair in <strong>Europa</strong>, UK, Midden-Oosten, Azië-Pacific.</li>
+      <li>U opereert in <strong>sterk gereguleerde sectoren</strong>: zorg, overheid, banken, energie (Europese compliance-eisen verwijzen expliciet naar ISO 27001).</li>
+      <li>U valt onder <strong>NIS2</strong> — de 10 minimale maatregelen van NIS2 sluiten één-op-één aan op ISO 27001 controls.</li>
+      <li>U wilt een <strong>officieel certificaat</strong> dat u 3 jaar kunt tonen, niet jaarlijks een rapport moet updaten.</li>
+      <li>U heeft een <strong>beperkter budget</strong> of kleiner team (ISO-traject is meestal goedkoper).</li>
+    </ul>
+
+    <h2>Wanneer kiest u SOC 2?</h2>
+    <ul>
+      <li>U verkoopt <strong>SaaS aan Amerikaanse klanten</strong>, vooral enterprise — die vragen het letterlijk in hun security questionnaire.</li>
+      <li>U verkoopt aan <strong>tech-bedrijven in de VS</strong> die SOC 2 gebruiken als vendor-criterium.</li>
+      <li>U werkt met <strong>gevoelige klantdata</strong> waar de Trust Service Criteria op aansluiten (vooral Availability en Processing Integrity).</li>
+      <li>U heeft een <strong>moderne tech-stack</strong> met veel automatisering (AWS/GCP/Azure + monitoring) — SOC 2 is dan vaak sneller te halen dan de documentatielast van ISO suggereert.</li>
+    </ul>
+
+    <h2>Wanneer doet u beide?</h2>
+    <p>Als u een <strong>Europese SaaS bent met VS-klanten</strong> is de slimste volgorde:</p>
+    <ol>
+      <li><strong>Eerst ISO 27001</strong>: bouwt uw ISMS en documentatie op een structurele manier op. Europees basiscertificaat in jaar 1.</li>
+      <li><strong>Daarna SOC 2 Type II</strong> (jaar 2 of 3): bouwt dicht op uw ISO-fundament. Ongeveer 60-70% overlap. SOC-audit gaat sneller omdat de controls al gedocumenteerd en getoetst zijn.</li>
+    </ol>
+    <p>Deze volgorde voorkomt dat u twee parallelle trajecten tegelijk draait — een klassieke fout die startups maken als ze onder druk van een grote Amerikaanse prospect SOC 2 eerst doen, maar later ISO nog willen voor Europese deals.</p>
+
+    <h2>Wat u beter niet doet</h2>
+
+    <h3>SOC 2 als "dé Europese standaard" verkopen</h3>
+    <p>In Europa is ISO 27001 de de-facto standaard en de referentie in wetgeving (NIS2, DORA, AVG-richtlijnen). Een SOC 2 report telt, maar u moet vaker uitleggen wat het is. Bij overheidsaanbestedingen wint ISO bijna altijd.</p>
+
+    <h3>"We doen ISO 27001 en SOC 2 is dan klaar"</h3>
+    <p>De overlap is groot (~60-70%) maar niet volledig. Verschillen:</p>
+    <ul>
+      <li>SOC 2 vraagt specifiek om operationele effectiviteit over een periode (Type II) — ISO 27001 toetst ook effectiviteit maar minder granulair.</li>
+      <li>SOC 2 is meer output-gericht (logging, monitoring, change management), ISO is meer management-systeem-gericht (beleid, training, risico).</li>
+      <li>SOC 2 kent bedrijfseigen controls — u moet die zelf formuleren en bewijzen.</li>
+    </ul>
+
+    <h2>Praktisch: wat kost dit u?</h2>
+
+    <table>
+      <thead><tr><th>Scenario</th><th>Tijd tot eerste output</th><th>Jaar 1 totaal</th><th>Jaarlijks vanaf jaar 2</th></tr></thead>
+      <tbody>
+        <tr><td>ISO 27001 alleen (MKB 25 fte)</td><td>4-9 mnd</td><td class="num">€15.000 – €25.000</td><td class="num">€3.000 – €5.000</td></tr>
+        <tr><td>SOC 2 Type II alleen (MKB 25 fte)</td><td>6-18 mnd</td><td class="num">€25.000 – €60.000</td><td class="num">€18.000 – €40.000</td></tr>
+        <tr><td>ISO dan SOC 2 Type II</td><td>12-24 mnd</td><td class="num">€15k dan +€18k jr 2</td><td class="num">€20.000 – €45.000</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Tot slot: wat zeggen uw klanten?</h2>
+    <p>Het concreet stellen aan uw 5-10 belangrijkste prospects is de beste indicator. Stel letterlijk de vraag: <em>"Zou u ISO 27001 accepteren, of heeft u specifiek SOC 2 nodig?"</em>. 8 van de 10 enterprise-kopers in Europa accepteren ISO als gelijkwaardig. In de VS is dat 2-3 van de 10.</p>
+
+    <div class="end-cta">
+      <h3>Begin bij de basis: gap-analyse</h3>
+      <p>Of u nu ISO of SOC 2 wilt — de eerste stap is weten waar uw controls staan. Onze gap-analyse dekt de ISO 27001 Annex A volledig; SOC 2 Trust Service Criteria hebben ~70% overlap.</p>
+      <a href="/gap-analyse">Start gratis quickscan &rarr;</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <span>&copy; 2026 Annex27 &middot; KBO 1006.203.170</span>
+    <span>
+      <a href="/blog">Blog</a> &middot;
+      <a href="/privacy">Privacy</a> &middot;
+      <a href="/algemene-voorwaarden">AV</a> &middot;
+      <a href="/trust">Trust</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
